@@ -1,0 +1,11 @@
+{
+  "/proxy": {
+    "target": "http://alpha-intech.ru/calc/index.php",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/proxy": ""
+    },
+    "logLevel": "debug"
+  }
+}
