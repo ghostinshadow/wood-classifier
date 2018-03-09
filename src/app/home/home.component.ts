@@ -37,18 +37,37 @@ export class HomeComponent implements OnInit {
 
   factory: WoodTypeFactory;
   prototypes: any;
-  calculatedObjects: WoodType[];
+  buckets: object = {
+    'big_high_quality_container': [],
+    'big_best_quality_container': [],
+    'big_low_quality_container': [],
+    'big_medium_quality_container': [],
+    'huge_best_quality_container': [],
+    'huge_high_quality_container': [],
+    'huge_low_quality_container': [],
+    'huge_medium_quality_container': [],
+    'medium_best_quality_container': [],
+    'medium_high_quality_container': [],
+    'medium_low_quality_container': [],
+    'medium_medium_quality_container': [],
+    'small_best_quality_container': [],
+    'small_high_quality_container': [],
+    'small_low_quality_container': [],
+    'small_medium_quality_container': []
+  };
+  main_bucket: Array<WoodType> = [];
   apiRoot: string = 'http://localhost:4200/proxy';
   client: Http;
 
   constructor(private http: Http) {
+    debugger;
     this.prototypes = prototypes;
     this.factory = new WoodTypeFactory(this.prototypes);
     this.client = http;
-    debugger;
   }
 
   ngOnInit() {
+    this.calculateSizeOverRemoteApi(400, 50, 'L');
   }
 
   calculateSizeOverRemoteApi(length: number, diameter: number, quality: string){
@@ -62,7 +81,7 @@ export class HomeComponent implements OnInit {
     
     this.client.get(url).subscribe(
       res => {
-        let size = Number(res._body.match(/(\d\.\d+)/)[0])
+        let size = Number(res.text().match(/(\d\.\d+)/)[0])
         self.createElement(length, diameter, size, quality)
       },
       msg => console.error(`Error: ${msg.status} ${msg.statusText}`)
@@ -72,8 +91,8 @@ export class HomeComponent implements OnInit {
   createElement(length: number, diameter: number, size: number, quality: string){
     //set id
     let wood_type = this.factory.create(length, diameter, size, quality);
-    let wood_bucket = this.woodBuckets[wood_type.type];
-    wood_bucket.push(wood_type)
+    this.buckets[wood_type.container()].push(wood_type);
+    this.main_bucket.push(wood_type);
   }
 
 }

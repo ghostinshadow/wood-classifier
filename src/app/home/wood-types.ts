@@ -1,13 +1,25 @@
+import { v4 as uuid } from 'uuid';
+
 export class WoodType {
 	length: number;
 	diameter: number;
 	size: number;
 	type: string;
+	id: string;
 
 	constructor(length: number, diameter: number, size: number){
 		this.length = length;
 		this.diameter = diameter;
 		this.size = size;
+		this.id = uuid();
+	}
+
+	container(){
+		return this.type + '_container';
+	}
+
+	calculate_price(prices: object){
+		return this.size * prices[this.type] * 100;
 	}
 }
 
@@ -21,7 +33,7 @@ export class BigBestQuality extends WoodType{
 export class BigHighQuality extends WoodType{
 	constructor(length: number, diameter: number, size: number){
 		super(length, diameter, size);
-		this.type = 'medium_high_quality';
+		this.type = 'big_high_quality';
 	}
 }
 
