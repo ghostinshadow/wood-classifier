@@ -21,9 +21,13 @@ export class ResultsCalculator{
   	  temp_res['price'] = this.prices[type].value; 
   	  self.result[type] = temp_res;
   	})
-  	self.result['overal_price'] = self.result['overal_price'] / self.price_multiplier;
+  	self.result['overal_price'] = self.precise_round(self.result['overal_price'] / self.price_multiplier, 3);
 
   	return self.result;
+  }
+
+  precise_round(num, dec){
+    return Number(Math.round(Number(num + 'e' + dec)) + 'e-'+ dec)
   }
 
   calculate_sum_object(elements){
@@ -36,8 +40,8 @@ export class ResultsCalculator{
   	   self.result['overal_price'] += wood_type.calculate_price(self.prices);
   	})
 
-  	res.size = res.size / self.size_multiplier;
-  	res.calculated_price = res.calculated_price / self.price_multiplier;
+  	res.size = self.precise_round(res.size / self.size_multiplier, 3);
+  	res.calculated_price = self.precise_round(res.calculated_price / self.price_multiplier, 3);
 
   	return res;
   }

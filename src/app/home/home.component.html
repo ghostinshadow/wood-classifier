@@ -95,14 +95,14 @@
   <div class="row col-md-3 offset-md-1">
       <form #woodPieceForm="ngForm" (ngSubmit)="submitWoodPiece(woodPieceForm.form);">
         <div class="form-group">
-          <label for="wood-length">Довжина</label>
+          <label for="wood-length">Довжина, <span>см</span></label>
           <input type="number" ngModel #lengthField="ngModel" required name="length" class="form-control" id="wood-length" placeholder="400">
           <div *ngIf="lengthField.touched && lengthField.errors" class="alert alert-danger">
           	Потрібно вказати довжину
           </div>
         </div>
         <div class="form-group">
-          <label for="wood-diameter">Діаметр</label>
+          <label for="wood-diameter">Діаметр, <span>см</span></label>
           <input type="number" ngModel #diameterField="ngModel" required name="diameter" class="form-control" id="wood-diameter" placeholder="55">
           <div *ngIf="diameterField.touched && diameterField.errors" class="alert alert-danger">
           	Потрібно вказати діаметр

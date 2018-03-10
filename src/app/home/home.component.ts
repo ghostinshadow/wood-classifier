@@ -75,7 +75,6 @@ export class HomeComponent implements OnInit {
     this.getPrices().subscribe(data => {
       self.prices = JSON.parse(data.text());
       self.recalculate_result();
-      this.createElement(444,33, 1, 'L', 1)
     });
   }
 
