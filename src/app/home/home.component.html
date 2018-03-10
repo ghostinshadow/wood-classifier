@@ -1,40 +1,140 @@
-<table class="table-bordered table-hover">
-  <thead>
-    <th>Header</th>
-  </thead>
-  <tbody>
-    <tr class="text-center">
-      <td rowspan="2">{{ headers.diameter }}</td>
-      <td colspan="3">{{ qualityOptions.best }} </td>	
-      <td colspan="3">{{ qualityOptions.high }}</td>	
-      <td colspan="3">{{ qualityOptions.medium }}</td>	
-      <td colspan="3">{{ qualityOptions.low }}</td>	
-    </tr>    
-    <tr>
-      <td>{{ headers.size }}</td>
-      <td>{{ headers.price }}</td>
-      <td>{{ headers.cost }}</td>
-      <td>{{ headers.size }}</td>
-      <td>{{ headers.price }}</td>
-      <td>{{ headers.cost }}</td>
-      <td>{{ headers.size }}</td>
-      <td>{{ headers.price }}</td>
-      <td>{{ headers.cost }}</td>
-      <td>{{ headers.size }}</td>
-      <td>{{ headers.price }}</td>
-      <td>{{ headers.cost }}</td>
-    </tr>
-    <tr>
-      <td>{{ lengthOptions.small }}</td>
-    </tr>
-    <tr>
-      <td>{{ lengthOptions.medium }}</td>
-    </tr>
-    <tr>
-      <td>{{ lengthOptions.big }}</td>
-    </tr>
-    <tr>
-      <td>{{ lengthOptions.huge }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="row">
+  <div class="row col-md-7 offset-md-1">
+    <table class="table-bordered table-hover">
+      <thead class="text-center">
+        <th colspan="13">Закупівлі деревини</th>
+      </thead>
+      <tbody class="text-center">
+        <tr>
+          <td rowspan="2">{{ headers.diameter }}</td>
+          <td colspan="3">{{ qualityOptions.best }} </td>	
+          <td colspan="3">{{ qualityOptions.high }}</td>	
+          <td colspan="3">{{ qualityOptions.medium }}</td>	
+          <td colspan="3">{{ qualityOptions.low }}</td>	
+        </tr>    
+        <tr>
+          <td>{{ headers.size }}</td>
+          <td>{{ headers.price }}</td>
+          <td>{{ headers.cost }}</td>
+          <td>{{ headers.size }}</td>
+          <td>{{ headers.price }}</td>
+          <td>{{ headers.cost }}</td>
+          <td>{{ headers.size }}</td>
+          <td>{{ headers.price }}</td>
+          <td>{{ headers.cost }}</td>
+          <td>{{ headers.size }}</td>
+          <td>{{ headers.price }}</td>
+          <td>{{ headers.cost }}</td>
+        </tr>
+        <tr>
+          <td>{{ lengthOptions && lengthOptions.small }}</td>
+          <td>{{results && results.small_best_quality && results.small_best_quality.size }}</td>
+          <td>{{results && results.small_best_quality && results.small_best_quality.price }}</td>
+          <td>{{results && results.small_best_quality && results.small_best_quality.calculated_price }}</td>
+          <td>{{results && results.small_high_quality && results.small_high_quality.size }}</td>
+          <td>{{results && results.small_high_quality && results.small_high_quality.price }}</td>
+          <td>{{results && results.small_high_quality && results.small_high_quality.calculated_price }}</td>
+          <td>{{results && results.small_medium_quality && results.small_medium_quality.size }}</td>
+          <td>{{results && results.small_medium_quality && results.small_medium_quality.price }}</td>
+          <td>{{results && results.small_medium_quality && results.small_medium_quality.calculated_price }}</td>
+          <td>{{results && results.small_low_quality && results.small_low_quality.size }}</td>
+          <td>{{results && results.small_low_quality && results.small_low_quality.price }}</td>
+          <td>{{results && results.small_low_quality && results.small_low_quality.calculated_price }}</td>
+        </tr>
+        <tr>
+          <td>{{ lengthOptions && lengthOptions.medium }}</td>
+          <td>{{results && results.medium_best_quality && results.medium_best_quality.size }}</td>
+          <td>{{results && results.medium_best_quality && results.medium_best_quality.price }}</td>
+          <td>{{results && results.medium_best_quality && results.medium_best_quality.calculated_price }}</td>
+          <td>{{results && results.medium_high_quality && results.medium_high_quality.size }}</td>
+          <td>{{results && results.medium_high_quality && results.medium_high_quality.price }}</td>
+          <td>{{results && results.medium_high_quality && results.medium_high_quality.calculated_price }}</td>
+          <td>{{results && results.medium_medium_quality && results.medium_medium_quality.size }}</td>
+          <td>{{results && results.medium_medium_quality && results.medium_medium_quality.price }}</td>
+          <td>{{results && results.medium_medium_quality && results.medium_medium_quality.calculated_price }}</td>
+          <td>{{results && results.medium_low_quality && results.medium_low_quality.size }}</td>
+          <td>{{results && results.medium_low_quality && results.medium_low_quality.price }}</td>
+          <td>{{results && results.medium_low_quality && results.medium_low_quality.calculated_price }}</td>
+        </tr>
+        <tr>
+          <td>{{ lengthOptions && lengthOptions.big }}</td>
+          <td>{{results && results.big_best_quality && results.big_best_quality.size }}</td>
+          <td>{{results && results.big_best_quality && results.big_best_quality.price }}</td>
+          <td>{{results && results.big_best_quality && results.big_best_quality.calculated_price }}</td>
+          <td>{{results && results.big_high_quality && results.big_high_quality.size }}</td>
+          <td>{{results && results.big_high_quality && results.big_high_quality.price }}</td>
+          <td>{{results && results.big_high_quality && results.big_high_quality.calculated_price }}</td>
+          <td>{{results && results.big_medium_quality && results.big_medium_quality.size }}</td>
+          <td>{{results && results.big_medium_quality && results.big_medium_quality.price }}</td>
+          <td>{{results && results.big_medium_quality && results.big_medium_quality.calculated_price }}</td>
+          <td>{{results && results.big_low_quality && results.big_low_quality.size }}</td>
+          <td>{{results && results.big_low_quality && results.big_low_quality.price }}</td>
+          <td>{{results && results.big_low_quality && results.big_low_quality.calculated_price }}</td>
+        </tr>
+        <tr>
+            <td>{{results && lengthOptions && lengthOptions.huge }}</td>
+        	<td>{{results && results.huge_best_quality && results.huge_best_quality.size }}</td>
+        	<td>{{results && results.huge_best_quality && results.huge_best_quality.price }}</td>
+        	<td>{{results && results.huge_best_quality && results.huge_best_quality.calculated_price }}</td>
+        	<td>{{results && results.huge_high_quality && results.huge_high_quality.size }}</td>
+        	<td>{{results && results.huge_high_quality && results.huge_high_quality.price }}</td>
+        	<td>{{results && results.huge_high_quality && results.huge_high_quality.calculated_price }}</td>
+        	<td>{{results && results.huge_medium_quality && results.huge_medium_quality.size }}</td>
+        	<td>{{results && results.huge_medium_quality && results.huge_medium_quality.price }}</td>
+        	<td>{{results && results.huge_medium_quality && results.huge_medium_quality.calculated_price }}</td>
+        	<td>{{results && results.huge_low_quality && results.huge_low_quality.size }}</td>
+        	<td>{{results && results.huge_low_quality && results.huge_low_quality.price }}</td>
+        	<td>{{results && results.huge_low_quality && results.huge_low_quality.calculated_price }}</td>
+        </tr>
+        <tr>
+        	<td colspan="13">{{results && results.overal_price }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row col-md-3 offset-md-1">
+      <form #woodPieceForm="ngForm" (ngSubmit)="submitWoodPiece(woodPieceForm.form);">
+        <div class="form-group">
+          <label for="wood-length">Довжина</label>
+          <input type="number" ngModel #lengthField="ngModel" required name="length" class="form-control" id="wood-length" placeholder="400">
+          <div *ngIf="lengthField.touched && lengthField.errors" class="alert alert-danger">
+          	Потрібно вказати довжину
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="wood-diameter">Діаметр</label>
+          <input type="number" ngModel #diameterField="ngModel" required name="diameter" class="form-control" id="wood-diameter" placeholder="55">
+          <div *ngIf="diameterField.touched && diameterField.errors" class="alert alert-danger">
+          	Потрібно вказати діаметр
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="wood-coeficient">Коефіцієнт</label>
+          <input type="number" ngModel #coeficientField="ngModel" name="coeficient"  class="form-control" id="wood-coeficient" value="1.0" placeholder="1.0">
+        </div>
+        <div class="form-group">
+          <label for="wood-quality">Клас деревини:</label>
+          <select class="form-control" ngModel #qualityField="ngModel" name="quality" required id="wood-quality" value='1'>
+            <option value=''>Виберіть клас</option>
+            <option value='L'>L</option>
+            <option value='||'>||</option>
+            <option value='|||'>|||</option>
+            <option value='T'>T</option>
+          </select>
+        </div>
+        <button type="submit" [disabled]="!woodPieceForm.valid" class="btn btn-primary float-right">Додати</button>
+        {{ woodPieceForm.errors }}
+      </form>
+  </div>
+</div>
+<div class="col-md-5 offset-md-2">
+	<ul class="list-group">
+		<li class="list-group-item list-group-item-info" *ngFor="let wood_piece of main_bucket.reverse()">
+			Довжина: {{ wood_piece.length }};
+			Діаметер: {{ wood_piece.diameter }};
+			Об'єм: {{ wood_piece.size }};
+			Коефіцієнт: {{ wood_piece.coef }};
+			<button (click)="deletePiece(wood_piece.id);" type="button" class="btn btn-danger btn-sm">Видалити</button>
+		</li>
+	</ul>
+</div>

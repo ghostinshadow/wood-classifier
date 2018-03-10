@@ -5,6 +5,7 @@ import { WoodType } from './wood-types';
 import * as prototypes from "./wood-types";
 
 import { WoodTypeFactory } from './wood-type-factory';
+import { ResultsCalculator } from './results-calculator';
 
 @Component({
   selector: 'app-home',
@@ -58,19 +59,51 @@ export class HomeComponent implements OnInit {
   main_bucket: Array<WoodType> = [];
   apiRoot: string = 'http://localhost:4200/proxy';
   client: Http;
+  prices: object;
+  woodPieceForm: object = {coeficientField: 1};
+  calculator: ResultsCalculator;
+  results: object;
 
   constructor(private http: Http) {
-    debugger;
     this.prototypes = prototypes;
     this.factory = new WoodTypeFactory(this.prototypes);
     this.client = http;
   }
 
   ngOnInit() {
-    this.calculateSizeOverRemoteApi(400, 50, 'L');
+    let self = this;
+    this.getPrices().subscribe(data => {
+      self.prices = JSON.parse(data.text());
+      self.recalculate_result();
+      this.createElement(444,33, 1, 'L', 1)
+    });
   }
 
-  calculateSizeOverRemoteApi(length: number, diameter: number, quality: string){
+  submitWoodPiece(form){
+    let self = this;
+    let wood_piece = form.value;
+    this.calculateSizeOverRemoteApi(wood_piece.length, wood_piece.diameter,
+                                    wood_piece.quality, wood_piece.coeficient)
+  }
+
+  deletePiece(id){
+    this.main_bucket
+    let element = this.main_bucket.find(e => { return e.id == id });
+    this.remove_element_from_collection(this.main_bucket, element);
+    this.remove_element_from_collection(this.buckets[element.type + '_container'], element);
+    this.recalculate_result();
+  }
+
+  recalculate_result(){
+    let calculator = new ResultsCalculator(this.buckets, this.prices);
+    this.results = calculator.calculate_result();
+  }
+
+  remove_element_from_collection(collection, element){
+    collection.splice(collection.indexOf(element), 1);
+  }
+
+  calculateSizeOverRemoteApi(length: number, diameter: number, quality: string, coef: number){
     let self = this;
     let url = `${this.apiRoot}?`;
     url += 'standart=gost&';
@@ -82,17 +115,21 @@ export class HomeComponent implements OnInit {
     this.client.get(url).subscribe(
       res => {
         let size = Number(res.text().match(/(\d\.\d+)/)[0])
-        self.createElement(length, diameter, size, quality)
+        self.createElement(length, diameter, size, quality, coef)
       },
-      msg => console.error(`Error: ${msg.status} ${msg.statusText}`)
+      msg => console.log(`Error: ${msg.status} ${msg.statusText}`)
     ); 
   }
 
-  createElement(length: number, diameter: number, size: number, quality: string){
-    //set id
-    let wood_type = this.factory.create(length, diameter, size, quality);
+  createElement(length: number, diameter: number, size: number, quality: string, coef: number){
+    let wood_type = this.factory.create(length, diameter, size, quality, coef);
     this.buckets[wood_type.container()].push(wood_type);
     this.main_bucket.push(wood_type);
+    this.recalculate_result();
+  }
+
+  getPrices() {
+    return this.http.get("./assets/prices.json")
   }
 
 }

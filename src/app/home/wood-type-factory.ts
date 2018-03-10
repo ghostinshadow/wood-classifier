@@ -1,13 +1,14 @@
 export class WoodTypeFactory{
 	prototypes: any;
+	coef: number = 1;
 
 	constructor(prototypes: any){
 		this.prototypes = prototypes;
 	}
 
-	create(length: number, diameter: number, size: number, quality: string){
+	create(length: number, diameter: number, size: number, quality: string, coef?: number){
 		let class_name = this.class_name(diameter, quality);
-		return new this.prototypes[class_name](length, diameter, size);
+		return new this.prototypes[class_name](length, diameter, size, coef || this.coef);
 	}
 
 	class_name(diameter: number, quality: string){

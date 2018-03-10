@@ -3,6 +3,7 @@ import * as prototypes from "./wood-types";
 import {  BigBestQuality } from "./wood-types";
 
 import { async, TestBed } from '@angular/core/testing';
+import { ResultsCalculator } from './results-calculator';
 
 describe('WoodTypeFactory', () => {
     describe('.class_name', () => {
@@ -63,10 +64,75 @@ describe('WoodType', () => {
         let wood_type: BigBestQuality;
 
     it('should calculate price', async(() => {
-        var wood_type = new BigBestQuality(400, 33, 0.55);
-        var prices = {'big_best_quality': 35000};
+        var wood_type = new BigBestQuality(400, 33, 0.55, 1);
+        var prices = {'big_best_quality': {value: 35000} };
 
         expect(wood_type.calculate_price(prices)).toEqual(1925000);
         }))
+    })
+});
+
+
+describe('ResultsCalculator', () => {
+    describe('.constructor', () => {
+      it('accepts buckets and prices', async(() => {
+        let prices = {'big_best_quality': 35000};
+        let buckets = {};
+        let calculator = new ResultsCalculator(buckets, prices);
+
+        expect(calculator.buckets).toEqual({});
+      }))
+    })
+
+    describe('.calculate_result', () => {
+      it('calculates result object', async(() => {
+        let prices = {'big_best_quality': {'value': 35000} };
+        let wood_types = [new BigBestQuality(400, 33, 0.55, 1),
+                          new BigBestQuality(400, 37, 0.77, 1)]
+        let buckets = {'big_best_quality_container': wood_types};
+        let calculator = new ResultsCalculator(buckets, prices);
+
+        let result = calculator.calculate_result();
+
+        expect(result['big_best_quality']).toEqual({
+          'size': 1.32,
+          'calculated_price': 46200,
+          'price': 35000
+        })
+
+        expect(result['overal_price']).toEqual(46200)
+      }))
+    })
+
+    describe('.calculate_sum_object', () => {
+      it('calculates sum object', async(() => {
+        let prices = {'big_best_quality': {'value': 35000} };
+        let wood_types = [new BigBestQuality(400, 33, 0.55, 1),
+                          new BigBestQuality(400, 37, 0.77, 1)]
+        let buckets = {'big_best_quality_container': wood_types};
+        let calculator = new ResultsCalculator(buckets, prices);
+
+        let result = calculator.calculate_sum_object(wood_types);
+
+        expect(result).toEqual({
+          'size': 1.32,
+          'calculated_price': 46200
+        })
+      }))
+
+      it('is aware of given coefiecient', async(() => {
+        let prices = {'big_best_quality': {'value': 35000} };
+        let wood_types = [new BigBestQuality(400, 33, 0.55, 0.5),
+                          new BigBestQuality(400, 37, 0.77, 0.5)]
+        let buckets = {'big_best_quality_container': wood_types};
+        let calculator = new ResultsCalculator(buckets, prices);
+
+        let result = calculator.calculate_sum_object(wood_types);
+
+        expect(result).toEqual({
+          'size': 0.66,
+          'calculated_price': 23100
+        })
+      }))
     })
 })
