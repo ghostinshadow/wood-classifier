@@ -1,69 +1,69 @@
 {
     "huge_best_quality": {
-        "value": 35000,
+        "value": 12786,
         "comment": ">= 50 L"
     },
     "big_best_quality": {
-        "value": 34000,
+        "value": 11382,
         "comment": "36 - 49 L"
     },
     "medium_best_quality": {
-        "value": 33000,
+        "value": 9786,
         "comment": "26 - 35 L"
     },
     "small_best_quality": {
-        "value": 32000,
+        "value": 7434,
         "comment": "14 - 25 L"
     },
 
     "huge_high_quality": {
-        "value": 31000,
+        "value": 9876,
         "comment": ">= 50 ||"
     },
     "big_high_quality": {
-        "value": 30000,
+        "value": 9180,
         "comment": "36 - 49 ||"
     },
     "medium_high_quality": {
-        "value": 29000,
+        "value": 8028,
         "comment": "26 - 35 ||"
     },
     "small_high_quality": {
-        "value": 28000,
+        "value": 6263,
         "comment": "14 - 25 ||"
     },
 
     "huge_medium_quality": {
-        "value": 27000,
+        "value": 7290,
         "comment": ">= 50 |||"
     },
     "big_medium_quality": {
-        "value": 26000,
+        "value": 6798,
         "comment": "36 - 49 |||"
     },
     "medium_medium_quality": {
-        "value": 25000,
+        "value": 5472,
         "comment": "26 - 35 |||"
     },
     "small_medium_quality": {
-        "value": 24000,
+        "value": 4704,
         "comment": "14 - 25 |||"
     },
 
     "huge_low_quality": {
-        "value": 23000,
+        "value": 2748,
         "comment": ">= 50 T"
     },
     "big_low_quality": {
-        "value": 22000,
+        "value": 2508,
         "comment": "36 - 49 T"
     },
     "medium_low_quality": {
-        "value": 21000,
+        "value": 2268,
         "comment": "26 - 35 T"
     },
     "small_low_quality": {
-        "value": 20000,
+        "value": 1668,
         "comment": "14 - 25 T"
     }
 }

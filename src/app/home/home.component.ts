@@ -60,6 +60,7 @@ export class HomeComponent implements OnInit {
   apiRoot: string = 'http://localhost:4200/proxy';
   client: Http;
   prices: object;
+  capacity_dictionary: object;
   woodPieceForm: object = {coeficientField: 1};
   calculator: ResultsCalculator;
   results: object;
@@ -75,6 +76,9 @@ export class HomeComponent implements OnInit {
     this.getPrices().subscribe(data => {
       self.prices = JSON.parse(data.text());
       self.recalculate_result();
+    });
+    this.getCapacity().subscribe(data => {
+      self.capacity_dictionary = JSON.parse(data.text());
     });
   }
 
@@ -103,21 +107,8 @@ export class HomeComponent implements OnInit {
   }
 
   calculateSizeOverRemoteApi(length: number, diameter: number, quality: string, coef: number){
-    let self = this;
-    let url = `${this.apiRoot}?`;
-    url += 'standart=gost&';
-    url += 'LogLen=' + length + '&';
-    url += 'LogDiam=' + diameter + '&';
-    url += 'Quantity=' + 1 + '&';
-    url += Math.random();
-    
-    this.client.get(url).subscribe(
-      res => {
-        let size = Number(res.text().match(/(\d\.\d+)/)[0])
-        self.createElement(length, diameter, size, quality, coef)
-      },
-      msg => console.log(`Error: ${msg.status} ${msg.statusText}`)
-    ); 
+    let size = Number(this.capacity_dictionary[diameter][(length / 100).toFixed(1)]);
+    this.createElement(length, diameter, size, quality, coef) 
   }
 
   createElement(length: number, diameter: number, size: number, quality: string, coef: number){
@@ -130,5 +121,7 @@ export class HomeComponent implements OnInit {
   getPrices() {
     return this.http.get("./assets/prices.json")
   }
-
+  getCapacity() {
+    return this.http.get("./assets/godlike.json")
+  }
 }
